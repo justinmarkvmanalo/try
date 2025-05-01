@@ -50,12 +50,18 @@ class TestQueueManagementSystem(unittest.TestCase):
     # Test for adding a VIP customer to the VIP queue
     def test_add_customer_vip(self):
         add_customer("VIP", "Alice")
-        self.assertEqual(list(priority_queue.queue), ["Alice"])
+        self.assertEqual(
+            list(priority_queue.queue),
+            ["Alice"]
+        )
 
     # Test for adding a regular customer to the regular queue
     def test_add_customer_regular(self):
         add_customer("regular", "Bob")
-        self.assertEqual(list(regular_queue.queue), ["Bob"])
+        self.assertEqual(
+            list(regular_queue.queue),
+            ["Bob"]
+        )
 
     # Test for attempting to add a customer with an invalid queue type
     def test_add_customer_invalid(self):
@@ -67,9 +73,15 @@ class TestQueueManagementSystem(unittest.TestCase):
         add_customer("VIP", "Alice")
         add_customer("regular", "Bob")
         removed = remove_customer()
-        self.assertEqual(removed, "Alice")  # Check VIP customer is removed first
-        self.assertEqual(list(priority_queue.queue), [])
-        self.assertEqual(list(regular_queue.queue), ["Bob"])
+        self.assertEqual(removed, "Alice")
+        self.assertEqual(
+            list(priority_queue.queue),
+            []
+        )
+        self.assertEqual(
+            list(regular_queue.queue),
+            ["Bob"]
+        )
 
     # Test for removing a customer from the regular queue
     # when the VIP queue is empty
@@ -89,7 +101,10 @@ class TestQueueManagementSystem(unittest.TestCase):
         add_customer("VIP", "Alice")
         add_customer("regular", "Bob")
         queues = display_queues()
-        self.assertEqual(queues, {"VIP": ["Alice"], "Regular": ["Bob"]})
+        self.assertEqual(
+            queues,
+            {"VIP": ["Alice"], "Regular": ["Bob"]}
+        )
 
     # Test for adding multiple VIP customers and checking order
     def test_multiple_vip_customers(self):
