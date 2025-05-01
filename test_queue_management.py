@@ -8,25 +8,25 @@ regular_queue = Queue()
 
 def add_customer(queue_type, customer_name):
     if queue_type == "VIP":
-        priority_queue.put(customer_name)
+        priority_queue.put(customer_name)  # Add to VIP queue
     elif queue_type == "regular":
-        regular_queue.put(customer_name)
+        regular_queue.put(customer_name)  # Add to regular queue
     else:
         raise ValueError("Invalid queue type! Use 'VIP' or 'regular'.")
 
 
 def remove_customer():
     if not priority_queue.empty():
-        return priority_queue.get()
+        return priority_queue.get()  # Remove from VIP queue if available
     elif not regular_queue.empty():
-        return regular_queue.get()
+        return regular_queue.get()  # Remove from regular queue if VIP is empty
     else:
-        return None
+        return None  # Return None if both queues are empty
 
 
 def display_queues():
-    vip_queue = list(priority_queue.queue)
-    regular_queue_list = list(regular_queue.queue)
+    vip_queue = list(priority_queue.queue)  # Convert VIP queue to a list
+    regular_queue_list = list(regular_queue.queue)  # Convert regular queue to a list
     return {"VIP": vip_queue, "Regular": regular_queue_list}
 
 
@@ -34,8 +34,8 @@ class TestQueueManagementSystem(unittest.TestCase):
 
     def setUp(self):
         global priority_queue, regular_queue
-        priority_queue = Queue()
-        regular_queue = Queue()
+        priority_queue = Queue()  # Reset VIP queue
+        regular_queue = Queue()  # Reset regular queue
 
     def test_add_customer_vip(self):
         add_customer("VIP", "Alice")
@@ -167,6 +167,23 @@ class TestQueueManagementSystem(unittest.TestCase):
 
         self.assertEqual(
             display_queues(),
+            {
+                "VIP": [],
+                "Regular": []
+            }
+        )
+
+    def test_remove_empty_queue_multiple_times(self):
+        # Remove from an empty queue multiple times
+        self.assertIsNone(remove_customer())
+        self.assertIsNone(remove_customer())
+        self.assertIsNone(remove_customer())  # Ensure no errors
+
+    def test_display_empty_queues(self):
+        # Test display when both queues are empty
+        queues = display_queues()
+        self.assertEqual(
+            queues,
             {
                 "VIP": [],
                 "Regular": []
