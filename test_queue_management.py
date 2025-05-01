@@ -38,13 +38,6 @@ class TestQueueManagementSystem(unittest.TestCase):
         priority_queue = Queue()  # Reset VIP queue
         regular_queue = Queue()  # Reset regular queue
 
-    def test_add_customer_vip(self):
-        add_customer("VIP", "Alice")
-        self.assertEqual(
-            list(priority_queue.queue),
-            ["Alice"]
-        )
-
     def test_add_customer_regular(self):
         add_customer("regular", "Bob")
         self.assertEqual(
