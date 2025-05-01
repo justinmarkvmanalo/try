@@ -2,8 +2,10 @@ import unittest
 from queue import Queue
 
 # Code from your Customer Queue Management System
+
 priority_queue = Queue()
 regular_queue = Queue()
+
 
 def add_customer(queue_type, customer_name):
     if queue_type == "VIP":
@@ -13,6 +15,7 @@ def add_customer(queue_type, customer_name):
     else:
         raise ValueError("Invalid queue type! Use 'VIP' or 'regular'.")
 
+
 def remove_customer():
     if not priority_queue.empty():
         return priority_queue.get()
@@ -21,13 +24,16 @@ def remove_customer():
     else:
         return None
 
+
 def display_queues():
     vip_queue = list(priority_queue.queue)
     regular_queue_list = list(regular_queue.queue)
     return {"VIP": vip_queue, "Regular": regular_queue_list}
 
+
 # Unittest class
 class TestQueueManagementSystem(unittest.TestCase):
+
     def setUp(self):
         # Clear the queues before each test
         global priority_queue, regular_queue
@@ -70,5 +76,7 @@ class TestQueueManagementSystem(unittest.TestCase):
         queues = display_queues()
         self.assertEqual(queues, {"VIP": ["Alice"], "Regular": ["Bob"]})
 
+
 if __name__ == "__main__":
     unittest.main()
+    

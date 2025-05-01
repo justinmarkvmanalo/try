@@ -1,8 +1,11 @@
 import queue
 
 # Initialize the priority queue and regular queue
+
 priority_queue = queue.Queue()
+
 regular_queue = queue.Queue()
+
 
 def add_customer(queue_type, customer_name):
     if queue_type == "VIP":
@@ -12,6 +15,7 @@ def add_customer(queue_type, customer_name):
     else:
         raise ValueError("Invalid queue type! Use 'VIP' or 'regular'.")
 
+
 def remove_customer():
     if not priority_queue.empty():
         return priority_queue.get()
@@ -19,6 +23,7 @@ def remove_customer():
         return regular_queue.get()
     else:
         return None
+
 
 def display_queues():
     vip_queue = list(priority_queue.queue)
