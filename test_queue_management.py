@@ -26,7 +26,7 @@ def remove_customer():
 
 def display_queues():
     vip_queue = list(priority_queue.queue)  # Convert VIP queue to a list
-    regular_queue_list = list(regular_queue.queue)  # Convert regular queue to a list
+    regular_queue_list = list(regular_queue.queue)
     return {"VIP": vip_queue, "Regular": regular_queue_list}
 
 
