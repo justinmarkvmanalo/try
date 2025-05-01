@@ -3,10 +3,7 @@ from queue import Queue
 
 # Code from your Customer Queue Management System
 
-# Priority queue for VIP customers
 priority_queue = Queue()
-
-# Regular queue for walk-in customers
 regular_queue = Queue()
 
 
@@ -74,7 +71,8 @@ class TestQueueManagementSystem(unittest.TestCase):
         self.assertEqual(list(priority_queue.queue), [])
         self.assertEqual(list(regular_queue.queue), ["Bob"])
 
-    # Test for removing a customer from the regular queue when the VIP queue is empty
+    # Test for removing a customer from the regular queue
+    # when the VIP queue is empty
     def test_remove_customer_regular(self):
         add_customer("regular", "Bob")
         removed = remove_customer()
@@ -126,11 +124,17 @@ class TestQueueManagementSystem(unittest.TestCase):
         add_customer("regular", "Charlie")
 
         # Check initial queue state
-        self.assertEqual(display_queues(), {"VIP": ["Alice", "Eve"], "Regular": ["Bob", "Charlie"]})
+        self.assertEqual(
+            display_queues(),
+            {"VIP": ["Alice", "Eve"], "Regular": ["Bob", "Charlie"]}
+        )
 
         # Remove a VIP customer and verify updated state
         remove_customer()
-        self.assertEqual(display_queues(), {"VIP": ["Eve"], "Regular": ["Bob", "Charlie"]})
+        self.assertEqual(
+            display_queues(),
+            {"VIP": ["Eve"], "Regular": ["Bob", "Charlie"]}
+        )
 
     # Test for adding and immediately removing customers
     def test_add_and_remove_immediate(self):
