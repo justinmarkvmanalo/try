@@ -11,5 +11,5 @@ class AgeClassifier:
         elif age <= 64:
             return "Adult"
         else:
-            return "Senior"
+            return "Senior".
         
