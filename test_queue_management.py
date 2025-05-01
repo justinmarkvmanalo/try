@@ -1,7 +1,6 @@
 import unittest
 from queue import Queue
 
-# Code from your Customer Queue Management System
 
 priority_queue = Queue()
 regular_queue = Queue()
@@ -9,25 +8,25 @@ regular_queue = Queue()
 
 def add_customer(queue_type, customer_name):
     if queue_type == "VIP":
-        priority_queue.put(customer_name)  # Add to VIP queue
+        priority_queue.put(customer_name)
     elif queue_type == "regular":
-        regular_queue.put(customer_name)  # Add to regular queue
+        regular_queue.put(customer_name)
     else:
         raise ValueError("Invalid queue type! Use 'VIP' or 'regular'.")
 
 
 def remove_customer():
     if not priority_queue.empty():
-        return priority_queue.get()  # Remove from VIP queue if available
+        return priority_queue.get()
     elif not regular_queue.empty():
-        return regular_queue.get()  # Remove from regular queue if VIP is empty
+        return regular_queue.get()
     else:
-        return None  # Return None if both queues are empty
+        return None
 
 
 def display_queues():
-    vip_queue = list(priority_queue.queue)  # Convert VIP queue to a list
-    regular_queue_list = list(regular_queue.queue)  # Convert regular queue to a list
+    vip_queue = list(priority_queue.queue)
+    regular_queue_list = list(regular_queue.queue)
     return {"VIP": vip_queue, "Regular": regular_queue_list}
 
 
@@ -35,8 +34,15 @@ class TestQueueManagementSystem(unittest.TestCase):
 
     def setUp(self):
         global priority_queue, regular_queue
-        priority_queue = Queue()  # Reset VIP queue
-        regular_queue = Queue()  # Reset regular queue
+        priority_queue = Queue()
+        regular_queue = Queue()
+
+    def test_add_customer_vip(self):
+        add_customer("VIP", "Alice")
+        self.assertEqual(
+            list(priority_queue.queue),
+            ["Alice"]
+        )
 
     def test_add_customer_regular(self):
         add_customer("regular", "Bob")
@@ -86,7 +92,7 @@ class TestQueueManagementSystem(unittest.TestCase):
 
     def test_remove_customer_empty(self):
         removed = remove_customer()
-        self.assertIsNone(removed)  # Check that None is returned
+        self.assertIsNone(removed)
 
     def test_multiple_vip_customers(self):
         add_customer("VIP", "Alice")
